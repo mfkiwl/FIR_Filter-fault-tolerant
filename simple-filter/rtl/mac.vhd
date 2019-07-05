@@ -20,7 +20,7 @@ begin
 
   p_reg_proc : process (i_clk) is
   begin  -- process p_reg_proc
-    if i_clk'event and i_clk = '1' then  -- rising clock edge
+    if i_clk'event and i_clk = '0' then  -- falling clock edge
       r_reg <= i_mac;
     end if;
   end process p_reg_proc;

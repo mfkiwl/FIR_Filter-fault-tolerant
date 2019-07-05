@@ -10,7 +10,7 @@ f1 = 400;
 f2 = 4000;
 
 %specifikacija NF filtra
-fir_ord = 10;
+fir_ord = 9;
 Wn=[0.1];
 %odbirci prozorske funkcije koja se koristi
 pravougaoni = rectwin(fir_ord+1);
@@ -31,8 +31,8 @@ subplot(2,1,1), stem(n,u), title('Ulazni signal u trajanju od 150 odbiraka');
 subplot(2,1,2), stem(n,y_real), title('Izlazni signal u trajanju od 150 odbiraka racunat pomocu funkcije filter');
 
 
-
-twos_comp = dec2fix_p(b, word_length);
+twos_comp_coef = dec2fix_p(b, word_length);
+twos_comp_out = dec2fix_p(y_real, word_length);
 
 ##
 ##%digitalizacija diskretnog signala
