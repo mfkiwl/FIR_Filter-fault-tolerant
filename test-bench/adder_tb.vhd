@@ -21,7 +21,7 @@ architecture testing_adder of adder_tb is
   -- component ports
   signal dut_i_num1 : std_logic_vector (N-1 downto 0);
   signal dut_i_num2 : std_logic_vector (N-1 downto 0);
-  signal dut_o_sum  : std_logic_vector (N downto 0);
+  signal dut_o_sum  : std_logic_vector (N-1 downto 0);
   signal sim_output : std_logic_vector (N-1 downto 0);
 
   -- clock
@@ -35,11 +35,10 @@ architecture testing_adder of adder_tb is
 begin  -- architecture testing_adder
 
   -- component instantiation
-  DUT : entity work.adder
+  adder_1 : entity work.adder
     generic map (
       N => N)
     port map (
-      i_clk  => Clk,
       i_num1 => dut_i_num1,
       i_num2 => dut_i_num2,
       o_sum  => dut_o_sum);
@@ -68,7 +67,7 @@ begin  -- architecture testing_adder
 
       wait for 5 ns;
 
-      assert abs(to_integer(signed(sim_output)) - to_integer(signed(dut_o_sum))) < 1
+      assert abs(to_integer(signed(sim_output)) - to_integer(signed(dut_o_sum))) < 2
         report "Not calculated correctly"
         severity error;
 
@@ -76,17 +75,6 @@ begin  -- architecture testing_adder
     end loop;
 
   end process WaveGen_Proc;
-
-
-  -- Assert_Proc : process (Clk) is
-  -- begin  -- process Assert_Proc
-  --   if Clk'event and Clk = '0' then     -- rising clock edge
-  --     assert to_integer(signed(sim_output)) = to_integer(signed(dut_o_sum))
-  --       report "Not calculated correctly"
-  --       severity error;
-  --   end if;
-  -- end process Assert_Proc;
-
 
 
 end architecture testing_adder;

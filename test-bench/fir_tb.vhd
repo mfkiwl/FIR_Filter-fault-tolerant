@@ -14,7 +14,7 @@ end entity fir_tb;
 architecture fir_simulation of fir_tb is
 
   -- component generics
-  constant N : integer := 24;
+  constant N     : integer := 24;
   constant ORDER : integer := 10;
 
   -- component ports
@@ -51,7 +51,7 @@ begin  -- architecture fir_simulation
   begin
     -- insert signal assignments here
 
-    u_i        <= (others => '0');
+    u_i <= (others => '0');
     -- readline(output_test_vector, tv);
     -- sim_output <= to_std_logic_vector(string(tv));
     wait until falling_edge(Clk);
