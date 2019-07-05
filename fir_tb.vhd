@@ -15,7 +15,7 @@ architecture fir_simulation of fir_tb is
 
   -- component generics
   constant N : integer := 24;
-  constant ORDER : integer := 5;
+  constant ORDER : integer := 10;
 
   -- component ports
   signal u_i : std_logic_vector (N-1 downto 0);
