@@ -28,9 +28,9 @@ architecture testing_adder of adder_tb is
   signal Clk : std_logic := '1';
 
   constant per_c          : time := 20ns;
-  file input_test_vector1 : text open read_mode is "/home/milos/octave/input1.txt";
-  file input_test_vector2 : text open read_mode is "/home/milos/octave/input2.txt";
-  file output_test_vector : text open read_mode is "/home/milos/octave/output_add.txt";
+  file input_test_vector1 : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/input2.txt";
+  file input_test_vector2 : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/input_sine.txt";
+  file output_test_vector : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/output_add.txt";
 
 begin  -- architecture testing_adder
 
@@ -62,6 +62,8 @@ begin  -- architecture testing_adder
       dut_i_num1 <= to_std_logic_vector(string(tv));
       readline(input_test_vector2, tv);
       dut_i_num2 <= to_std_logic_vector(string(tv));
+      -- dut_i_num2 <= std_logic_vector(to_signed(-5870000, 24));
+      -- dut_i_num2 <= to_std_logic_vector(string(tv));
       readline(output_test_vector, tv);
       sim_output <= to_std_logic_vector(string(tv));
 
