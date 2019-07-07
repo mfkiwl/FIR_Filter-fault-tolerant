@@ -18,6 +18,9 @@ architecture Behavioral of adder is
 begin
 
   w_out_tmp <= std_logic_vector(resize(signed(i_num1), N+1) + resize(signed(i_num2), N+1));
+
+
+
   saturation_process : process (w_out_tmp, i_num1, i_num2) is
   begin  -- process saturation_process
     -- Check if overflow is happening. Saturate to max/min value

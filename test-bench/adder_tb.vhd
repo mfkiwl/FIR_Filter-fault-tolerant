@@ -28,7 +28,7 @@ architecture testing_adder of adder_tb is
   signal Clk : std_logic := '1';
 
   constant per_c          : time := 20ns;
-  file input_test_vector1 : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/input2.txt";
+  file input_test_vector1 : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/input1.txt";
   file input_test_vector2 : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/input_sine.txt";
   file output_test_vector : text open read_mode is "/home/milos/FIR-fault-tolerant/utils/octave/output_add.txt";
 
