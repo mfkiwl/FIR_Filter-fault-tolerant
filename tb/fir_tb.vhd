@@ -52,6 +52,14 @@ begin  -- architecture fir_simulation
 	begin
 		--signal_force("/adder_tb/dut_i_num1", b"000000000000000000000111", 25 ns, freeze, 90 ns, 1);
 		--signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/r_reg", b"000000000000000000000000", 40 ns, freeze, open, 1);
+    --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
+    --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, open, 1);
+    --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
+    --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, open, 1);
+    
+    -- Injecting Fault to MAC(x) module 
+    signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
+    signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, 200 ns, 1);
 		wait;
 	end process force_process;
 
