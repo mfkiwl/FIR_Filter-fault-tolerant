@@ -34,8 +34,8 @@ architecture Behavioral of fir is
 
 begin
 
-  prvi_MAC :
-    entity work.mac(behavioral)
+  FIRST_MAC :
+    entity work.mac_faulty(behavioral)
       port map(i_clk => clk_i,
                i_u   => u_i,
                i_bn  => b(ORDER-1),
@@ -46,7 +46,7 @@ begin
   for I in 0 to ORDER-2 generate
 
     MAC :
-      entity work.mac(behavioral)
+      entity work.mac_faulty(behavioral)
         port map(i_clk => clk_i,
                  i_u   => u_i,
                  i_bn  => b(ORDER-1-I),
@@ -56,10 +56,6 @@ begin
 
 
   y_o <= mac_inter(ORDER-1);
-
-
-
-
 
 
 end Behavioral;
