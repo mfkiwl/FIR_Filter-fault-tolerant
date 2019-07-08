@@ -57,23 +57,22 @@ begin  -- architecture testing_adder
     variable tmp : std_logic_vector (N-1 downto 0);
   begin
     -- insert signal assignments here
-        file_open(file_VECTORS, "/home/milos/FIR-fault-tolerant/utils/octave/input1.txt",  read_mode);
-
+    --file_open(file_VECTORS, "C:\Users\milos\Desktop\FIR_Filter-fault-tolerant\utils\octave\input1.txt",  read_mode);
 
     dut_i_num1 <= (others => '0');
     --readline(output_test_vector, tv);
     --sim_output <= to_std_logic_vector(string(tv));
     wait until falling_edge(Clk);
 
-    while not endfile(file_VECTORS) loop
-      readline(file_VECTORS, tv);
+    --while not endfile(file_VECTORS) loop
+      --readline(file_VECTORS, tv);
 --      dut_i_num1 <= to_std_logic_vector(string(tv));
-      read(tv, tmp);
-	dut_i_num1 <= tmp;
-      readline(file_VECTORS, tv);
+      --read(tv, tmp);
+	dut_i_num1 <= (others => '0');
+      --readline(file_VECTORS, tv);
 --      dut_i_num2 <= to_std_logic_vector(string(tv));
-      read(tv, tmp);
-	dut_i_num2 <= tmp;
+      --read(tv, tmp);
+	dut_i_num2 <= (others => '1');
       -- dut_i_num2 <= std_logic_vector(to_signed(-5870000, 24));
       -- dut_i_num2 <= to_std_logic_vector(string(tv));
 --      readline(output_test_vector, tv);
@@ -86,7 +85,7 @@ begin  -- architecture testing_adder
         severity error;
 
       wait until falling_edge(Clk);
-    end loop;
+    --end loop;
 
   end process WaveGen_Proc;
 

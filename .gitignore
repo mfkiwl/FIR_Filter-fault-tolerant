@@ -1,2 +1,14 @@
 
 *.odt#
+*.mti
+*.mpf
+*.bak
+*.qdb
+*.qpg
+*.qtl
+*.wlf
+*.bak
+*.bak
+*.bak
+
+work/
