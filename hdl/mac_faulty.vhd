@@ -14,21 +14,19 @@ end mac_faulty;
 
 --------------------------------------------------------
 architecture Behavioral of mac_faulty is
-  signal r_reg             : std_logic_vector(N-1 downto 0) := (others => '0');
+  type std_2d_val_faults is array (3 downto 0) of std_logic_vector(23 downto 0);
+  type std_2d_sel_faults is array (3 downto 0) of std_logic_vector(3 downto 0);
+  signal r_reg        : std_logic_vector(N-1 downto 0) := (others => '0');
   -- Wires without fault
-  signal w_mult            : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal w_add             : std_logic_vector(N-1 downto 0) := (others => '0');
+  signal w_mult       : std_logic_vector(N-1 downto 0) := (others => '0');
+  signal w_add        : std_logic_vector(N-1 downto 0) := (others => '0');
   -- Wires with fault
-  signal w_wf_reg          : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal w_wf_mult         : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal w_wf_add          : std_logic_vector(N-1 downto 0) := (others => '0');
+  signal w_wf_reg     : std_logic_vector(N-1 downto 0) := (others => '0');
+  signal w_wf_mult    : std_logic_vector(N-1 downto 0) := (others => '0');
+  signal w_wf_add     : std_logic_vector(N-1 downto 0) := (others => '0');
   -- Signals that are going to be Forced in ModelSim
-  signal reg_fault_value   : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal reg_fault_select  : std_logic_vector(3 downto 0)   := (others => '0');
-  signal mult_fault_value  : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal mult_fault_select : std_logic_vector(3 downto 0)   := (others => '0');
-  signal add_fault_value   : std_logic_vector(N-1 downto 0) := (others => '0');
-  signal add_fault_select  : std_logic_vector(3 downto 0)   := (others => '0');
+  signal fault_value  : std_2d_val_faults              := (others => (others => '0'));
+  signal fault_select : std_2d_sel_faults              := (others => (others => '0'));
 begin
 
   p_reg_proc : process (i_clk) is
@@ -43,8 +41,8 @@ begin
       N => N)
     port map (
       i_signal        => r_reg,
-      i_fault_value   => reg_fault_value,
-      i_fault_select  => reg_fault_select,
+      i_fault_value   => fault_value(0),
+      i_fault_select  => fault_select(0),
       o_faulty_signal => w_wf_reg);
 
 
@@ -61,8 +59,8 @@ begin
       N => N)
     port map (
       i_signal        => w_mult,
-      i_fault_value   => mult_fault_value,
-      i_fault_select  => mult_fault_select,
+      i_fault_value   => fault_value(1),
+      i_fault_select  => fault_select(1),
       o_faulty_signal => w_wf_mult);
 
 
@@ -80,8 +78,8 @@ begin
       N => N)
     port map (
       i_signal        => w_add,
-      i_fault_value   => add_fault_value,
-      i_fault_select  => add_fault_select,
+      i_fault_value   => fault_value(2),
+      i_fault_select  => fault_select(2),
       o_faulty_signal => w_wf_add);
 
   o_mac <= w_wf_add;

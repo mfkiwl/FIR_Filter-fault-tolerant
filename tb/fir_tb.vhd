@@ -53,7 +53,7 @@ begin  -- architecture fir_simulation
 
 
   force_process : process
-    variable tv  : line;
+    variable tv : line;
   begin
     --signal_force("/adder_tb/dut_i_num1", b"000000000000000000000111", 25 ns, freeze, 90 ns, 1);
     --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/r_reg", b"000000000000000000000000", 40 ns, freeze, open, 1);
@@ -65,8 +65,8 @@ begin  -- architecture fir_simulation
     -- Injecting Fault to MAC(x) module
 
 
-    signal_force(fault1_sel_sig, fault1_select, 40 ns, freeze, 200 ns, 1);
-    signal_force(fault1_val_sig, fault1_value, 40 ns, freeze, 200 ns, 1);
+    signal_force(fault1_sel_sig, fault1_select, fault1_start_time, freeze, fault1_stop_time, 1);
+    signal_force(fault1_val_sig, fault1_value, fault1_start_time, freeze, fault1_stop_time, 1);
     wait;
   end process force_process;
 
