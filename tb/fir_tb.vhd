@@ -5,7 +5,7 @@ use std.textio.all;
 use ieee.std_logic_textio.all;
 use modelsim_lib.util.all;
 use ieee.math_real.all;
-use work.faults.all;
+use work.random_faults.all;
 
 ----------------------------------------------------------------------
 
@@ -65,8 +65,18 @@ begin  -- architecture fir_simulation
     -- Injecting Fault to MAC(x) module
 
 
+    signal_force(fault0_sel_sig, fault0_select, fault0_start_time, freeze, fault0_stop_time, 1);
+    signal_force(fault0_val_sig, fault0_value, fault0_start_time, freeze, fault0_stop_time, 1);
+
     signal_force(fault1_sel_sig, fault1_select, fault1_start_time, freeze, fault1_stop_time, 1);
     signal_force(fault1_val_sig, fault1_value, fault1_start_time, freeze, fault1_stop_time, 1);
+
+    signal_force(fault2_sel_sig, fault2_select, fault2_start_time, freeze, fault2_stop_time, 1);
+    signal_force(fault2_val_sig, fault2_value, fault2_start_time, freeze, fault2_stop_time, 1);
+
+    signal_force(fault3_sel_sig, fault3_select, fault3_start_time, freeze, fault3_stop_time, 1);
+    signal_force(fault3_val_sig, fault3_value, fault3_start_time, freeze, fault3_stop_time, 1);
+
     wait;
   end process force_process;
 
