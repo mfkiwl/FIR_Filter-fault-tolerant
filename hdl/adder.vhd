@@ -14,7 +14,7 @@ end adder;
 
 ---------------------------------------------------------
 architecture Behavioral of adder is
-  signal w_out_tmp : std_logic_vector(N downto 0);
+  signal w_out_tmp : std_logic_vector(N downto 0) := (others => '0');
 begin
 
   w_out_tmp <= std_logic_vector(resize(signed(i_num1), N+1) + resize(signed(i_num2), N+1));

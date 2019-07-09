@@ -23,7 +23,7 @@ end fault_injector;
 
 ---------------------------------------------------------
 architecture Behavioral of fault_injector is
-  signal w_out_tmp : std_logic_vector(N downto 0);
+  signal w_out_tmp : std_logic_vector(N downto 0) := (others => '0');
 begin
 
   mux_process : process (i_signal, i_fault_value, i_fault_select) is

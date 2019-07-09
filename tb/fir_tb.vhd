@@ -4,6 +4,8 @@ use IEEE.NUMERIC_STD.all;
 use std.textio.all;
 use ieee.std_logic_textio.all;
 use modelsim_lib.util.all;
+use ieee.math_real.all;
+use work.faults.all;
 
 ----------------------------------------------------------------------
 
@@ -28,10 +30,12 @@ architecture fir_simulation of fir_tb is
   signal Clk : std_logic := '1';
 
   signal sim_output : std_logic_vector (N-1 downto 0);
-  
-  file input_test_vector1 : text open read_mode is "C:\Users\milos\Desktop\FIR_Filter-fault-tolerant\utils\octave\input.txt";
 
-  file output_test_vector : text open read_mode is "C:\Users\milos\Desktop\FIR_Filter-fault-tolerant\utils\octave\output_filter.txt";
+  file input_test_vector1 : text open read_mode is "utils/octave/input.txt";
+
+  file output_test_vector : text open read_mode is "utils/octave/output_filter.txt";
+
+  file fault_test_vector : text open read_mode is "utils/faults.txt";
 
 begin  -- architecture fir_simulation
 
@@ -46,27 +50,30 @@ begin  -- architecture fir_simulation
       clk_i => Clk,
       u_i   => u_i,
       y_o   => y_o);
-      
-      
+
+
   force_process : process
-	begin
-		--signal_force("/adder_tb/dut_i_num1", b"000000000000000000000111", 25 ns, freeze, 90 ns, 1);
-		--signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/r_reg", b"000000000000000000000000", 40 ns, freeze, open, 1);
+    variable tv  : line;
+  begin
+    --signal_force("/adder_tb/dut_i_num1", b"000000000000000000000111", 25 ns, freeze, 90 ns, 1);
+    --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/r_reg", b"000000000000000000000000", 40 ns, freeze, open, 1);
     --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
     --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, open, 1);
     --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
     --signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, open, 1);
-    
-    -- Injecting Fault to MAC(x) module 
-    signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_select", b"0100", 40 ns, freeze, 200 ns, 1);
-    signal_force("/fir_tb/fir_1/GEN_MAC(0)/MAC/add_fault_value", b"111111111111111111111111", 40 ns, freeze, 200 ns, 1);
-		wait;
-	end process force_process;
+
+    -- Injecting Fault to MAC(x) module
+
+
+    signal_force(fault1_sel_sig, fault1_select, 40 ns, freeze, 200 ns, 1);
+    signal_force(fault1_val_sig, fault1_value, 40 ns, freeze, 200 ns, 1);
+    wait;
+  end process force_process;
 
 
   -- waveform generation
   WaveGen_Proc : process
-    variable tv : line;
+    variable tv  : line;
     variable tmp : std_logic_vector (N-1 downto 0);
 
   begin

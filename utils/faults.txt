@@ -1,0 +1,2 @@
+/fir_tb/fir_1/GEN_MAC(4)/MAC/reg_fault_select
+/fir_tb/fir_1/GEN_MAC(4)/MAC/reg_fault_value
