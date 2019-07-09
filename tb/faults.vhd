@@ -2,7 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 package faults is
-  constant N                 : integer := 24;
   constant fault1_select     : string  := "0100";
   constant fault1_value      : string  := "001000001000000000000000";
   constant fault1_val_sig    : string  := "/fir_tb/fir_1/GEN_MAC(0)/MAC/fault_value(2)";
