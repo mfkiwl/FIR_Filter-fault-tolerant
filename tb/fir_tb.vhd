@@ -22,8 +22,9 @@ architecture fir_simulation of fir_tb is
   constant ORDER : integer := 10;
 
   -- component ports
-  signal u_i : std_logic_vector (N-1 downto 0);
-  signal y_o : std_logic_vector (N-1 downto 0);
+  signal u_i           : std_logic_vector (N-1 downto 0);
+  signal y_o           : std_logic_vector (N-1 downto 0);
+  signal y_o_n_modular : std_logic_vector (N-1 downto 0);
 
 
   -- clock
@@ -52,6 +53,16 @@ begin  -- architecture fir_simulation
       y_o   => y_o);
 
 
+  n_modular_fir_1 : entity work.n_modular_fir
+    generic map (
+      N       => N,
+      ORDER   => ORDER,
+      FIR_NUM => 5)
+    port map (
+      clk_i => Clk,
+      u_i   => u_i,
+      y_o   => y_o_n_modular);
+
   force_process : process
     variable tv : line;
   begin
@@ -67,15 +78,53 @@ begin  -- architecture fir_simulation
 
     signal_force(fault0_sel_sig, fault0_select, fault0_start_time, freeze, fault0_stop_time, 1);
     signal_force(fault0_val_sig, fault0_value, fault0_start_time, freeze, fault0_stop_time, 1);
+    signal_force(fault0_sel_sig_n_modular, fault0_select, fault0_start_time, freeze, fault0_stop_time, 1);
+    signal_force(fault0_val_sig_n_modular, fault0_value, fault0_start_time, freeze, fault0_stop_time, 1);
 
     signal_force(fault1_sel_sig, fault1_select, fault1_start_time, freeze, fault1_stop_time, 1);
     signal_force(fault1_val_sig, fault1_value, fault1_start_time, freeze, fault1_stop_time, 1);
+    signal_force(fault1_sel_sig_n_modular, fault1_select, fault1_start_time, freeze, fault1_stop_time, 1);
+    signal_force(fault1_val_sig_n_modular, fault1_value, fault1_start_time, freeze, fault1_stop_time, 1);
 
     signal_force(fault2_sel_sig, fault2_select, fault2_start_time, freeze, fault2_stop_time, 1);
     signal_force(fault2_val_sig, fault2_value, fault2_start_time, freeze, fault2_stop_time, 1);
+    signal_force(fault2_sel_sig_n_modular, fault2_select, fault2_start_time, freeze, fault2_stop_time, 1);
+    signal_force(fault2_val_sig_n_modular, fault2_value, fault2_start_time, freeze, fault2_stop_time, 1);
 
     signal_force(fault3_sel_sig, fault3_select, fault3_start_time, freeze, fault3_stop_time, 1);
     signal_force(fault3_val_sig, fault3_value, fault3_start_time, freeze, fault3_stop_time, 1);
+    signal_force(fault3_sel_sig_n_modular, fault3_select, fault3_start_time, freeze, fault3_stop_time, 1);
+    signal_force(fault3_val_sig_n_modular, fault3_value, fault3_start_time, freeze, fault3_stop_time, 1);
+
+    signal_force(fault4_sel_sig, fault4_select, fault4_start_time, freeze, fault4_stop_time, 1);
+    signal_force(fault4_val_sig, fault4_value, fault4_start_time, freeze, fault4_stop_time, 1);
+    signal_force(fault4_sel_sig_n_modular, fault4_select, fault4_start_time, freeze, fault4_stop_time, 1);
+    signal_force(fault4_val_sig_n_modular, fault4_value, fault4_start_time, freeze, fault4_stop_time, 1);
+
+    signal_force(fault5_sel_sig, fault5_select, fault5_start_time, freeze, fault5_stop_time, 1);
+    signal_force(fault5_val_sig, fault5_value, fault5_start_time, freeze, fault5_stop_time, 1);
+    signal_force(fault5_sel_sig_n_modular, fault5_select, fault5_start_time, freeze, fault5_stop_time, 1);
+    signal_force(fault5_val_sig_n_modular, fault5_value, fault5_start_time, freeze, fault5_stop_time, 1);
+
+    signal_force(fault6_sel_sig, fault6_select, fault6_start_time, freeze, fault6_stop_time, 1);
+    signal_force(fault6_val_sig, fault6_value, fault6_start_time, freeze, fault6_stop_time, 1);
+    signal_force(fault6_sel_sig_n_modular, fault6_select, fault6_start_time, freeze, fault6_stop_time, 1);
+    signal_force(fault6_val_sig_n_modular, fault6_value, fault6_start_time, freeze, fault6_stop_time, 1);
+
+    -- signal_force(fault7_sel_sig, fault7_select, fault7_start_time, freeze, fault7_stop_time, 1);
+    -- signal_force(fault7_val_sig, fault7_value, fault7_start_time, freeze, fault7_stop_time, 1);
+    signal_force(fault7_sel_sig_n_modular, fault7_select, fault7_start_time, freeze, fault7_stop_time, 1);
+    signal_force(fault7_val_sig_n_modular, fault7_value, fault7_start_time, freeze, fault7_stop_time, 1);
+
+    -- signal_force(fault8_sel_sig, fault8_select, fault8_start_time, freeze, fault8_stop_time, 1);
+    -- signal_force(fault8_val_sig, fault8_value, fault8_start_time, freeze, fault8_stop_time, 1);
+    signal_force(fault8_sel_sig_n_modular, fault8_select, fault8_start_time, freeze, fault8_stop_time, 1);
+    signal_force(fault8_val_sig_n_modular, fault8_value, fault8_start_time, freeze, fault8_stop_time, 1);
+
+    -- signal_force(fault9_sel_sig, fault9_select, fault9_start_time, freeze, fault9_stop_time, 1);
+    -- signal_force(fault9_val_sig, fault9_value, fault9_start_time, freeze, fault9_stop_time, 1);
+    signal_force(fault9_sel_sig_n_modular, fault9_select, fault9_start_time, freeze, fault9_stop_time, 1);
+    signal_force(fault9_val_sig_n_modular, fault9_value, fault9_start_time, freeze, fault9_stop_time, 1);
 
     wait;
   end process force_process;
@@ -107,7 +156,7 @@ begin  -- architecture fir_simulation
 
       wait for 5 ns;
 
-      assert abs(abs(to_integer(signed(sim_output))) - abs(to_integer(signed(y_o)))) < 420000
+      assert abs(abs(to_integer(signed(sim_output))) - abs(to_integer(signed(y_o_n_modular)))) < 420000
         report "Not calculated correctly"
         severity error;
 

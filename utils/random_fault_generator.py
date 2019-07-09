@@ -35,15 +35,26 @@ def generate_fault(fault_num):
     )
     rand_mac = random.randint(0, 8)
     rand_el  = random.randint(0, 2)
+    rand_fir  = random.randint(1, 5)
     write_constant(
         val_name = "val_sig",
         val_type = "string",
         value = "\"/fir_tb/fir_1/GEN_MAC("+str(rand_mac)+")/MAC/fault_value("+str(rand_el)+")\""
     )
     write_constant(
+        val_name = "val_sig_n_modular",
+        val_type = "string",
+        value = "\"/fir_tb/n_modular_fir_1/GEN_FIRS("+str(rand_fir)+")/fir/GEN_MAC("+str(rand_mac)+")/MAC/fault_value("+str(rand_el)+")\""
+    )
+    write_constant(
         val_name = "sel_sig",
         val_type = "string",
         value = "\"/fir_tb/fir_1/GEN_MAC("+str(rand_mac)+")/MAC/fault_select("+str(rand_el)+")\""
+    )
+    write_constant(
+        val_name = "sel_sig_n_modular",
+        val_type = "string",
+        value = "\"/fir_tb/n_modular_fir_1/GEN_FIRS("+str(rand_fir)+")/fir/GEN_MAC("+str(rand_mac)+")/MAC/fault_select("+str(rand_el)+")\""
     )
     start_time = random.randint(100, 2800);
     write_constant(
@@ -67,7 +78,7 @@ f.write("use ieee.std_logic_1164.all;\n\n")
 
 f.write("package random_faults is\n\n")
 
-for i in range(4):
+for i in range(10):
     generate_fault(i);
 
 
